@@ -8,7 +8,15 @@
 </head>
 <body>
 
-<%= yield %>
+<% if current_user %>
+  <%= current_user.name %> : <%= link_to "Logout" , logout_path %>
+<% else %>
+  <%= link_to "Login", "/auth/#{DEFAULT_PROVIDER}" %>
+<% end %>
+
+<%# notice / alert %>
+<%= simple_format(flash[:notice], style: "color: green;") unless flash[:notice].blank? %>
+<%= simple_format(flash[:alert], style: "color: red;") unless flash[:alert].blank? %>
 
 </body>
 </html>
